@@ -1,0 +1,34 @@
+<h3>Binding data</h3>
+<div class="data-wrapper" *ngIf="dataFromModel.length > 0 && datasetFrameElement">
+  <p>Data from frame: {{ datasetFrameElement.frame_number }}</p>
+  <div class="free legend"></div>
+  <p>- free lot</p>
+  <div class="busy legend"></div>
+  <p>- busy lot</p>
+  <div class="not-available legend"></div>
+  <p>- not-available lot</p>
+</div>
+<mat-card class="parking-wrapper" *ngIf="dataFromModel.length > 0 && datasetFrameElement">
+  <div
+    class="parking-row"
+    *ngFor="
+      let parking_row of datasetFrameElement.park_lot_data_according_to_topology;
+      let i = index
+    "
+  >
+    <div
+      class="parking-lot"
+      [class.busy]="parking_lot.occupation === true"
+      [class.free]="
+        parking_lot.occupation === false && parking_lot.lot_id != '-1'
+      "
+      [class.not-available]="
+        parking_lot.occupation === false && parking_lot.lot_id == '-1'
+      "
+      *ngFor="let parking_lot of parking_row"
+    >
+      {{ parking_lot.lot_id !== -1 ? parking_lot.lot_id : "" }}
+    </div>
+  </div>
+</mat-card>
+

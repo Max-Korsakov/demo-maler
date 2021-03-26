@@ -1,0 +1,84 @@
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.dialog-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 6rem;
+    padding: 0 3.5rem 0 3.5rem;
+    background-color: rgb(26, 156, 176);
+    color: white;
+    box-sizing: border-box;
+}
+
+.dialog-content {
+    height: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items:baseline;
+    flex-direction: column;
+    padding: 0 35px;
+    box-sizing: border-box;
+}
+
+.parsing{
+    height: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    font-size: 28px;
+    color: rgb(206, 205, 205);
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    animation: ripple  2s;
+}
+
+@keyframes ripple {
+    0% {opacity: 0.1;}
+    40% {opacity: 1;}
+    80% {opacity: .1;}
+    100% {opacity: .5;}
+}
+
+.input-wrapper {
+    margin: 20px 20px;
+    padding: 5px 10px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(104, 103, 103, 0.3);
+    border-radius: 10px;
+    background-clip: content-box;
+    border: 2px solid transparent;
+  }
+
+.dialog-actions {
+    display: flex;
+    justify-content: space-around !important;
+    align-items: center;
+    margin-bottom: 1rem !important;
+    padding: 0 3rem 0 3rem !important;
+    border-top: 1px solid rgb(206, 205, 205);
+    border-radius: 5px;
+
+    &__button {
+        width: 45%;
+    }
+}

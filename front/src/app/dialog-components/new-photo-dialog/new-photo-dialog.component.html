@@ -1,0 +1,186 @@
+<div class="container">
+  <div class="dialog-header">
+    <h3 neo-dialog-title>New case</h3>
+  </div>
+  <div class="dialog-content">
+    <form class="form" [formGroup]="myForm">
+      <neo-card class="form-header">
+        <div class="data-wrapper">
+          <h3>Case information</h3>
+          <div>Items: {{ images.length }}</div>
+          <div>Size: {{ (size * 0.00000095367432).toFixed(3) }} Mb</div>
+          <div>
+            Data file: {{ jsonDataFile ? jsonDataFile.name : "Not choosen" }}
+          </div>
+        </div>
+        <div class="name-wrapper" *ngIf="!isUploadInProgress">
+          <mat-form-field *ngIf="isOldProjects">
+            <mat-label>Choose project</mat-label>
+            <mat-select
+              (selectionChange)="checkIsFormReadyToSubmit()"
+              formControlName="projectControl"
+            >
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category"
+                >{{ category }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <neo-form-field *ngIf="!isOldProjects" class="form-group">
+            <neo-label for="projectControl">Project name</neo-label>
+            <input
+              neoInput
+              formControlName="projectControl"
+              id="projectControl"
+              type="text"
+              class="form-control"
+              (change)="checkIsFormReadyToSubmit()"
+            />
+          </neo-form-field>
+
+          <neo-form-field class="form-group">
+            <neo-label for="name">Case name</neo-label>
+            <input
+              neoInput
+              formControlName="name"
+              id="name"
+              type="text"
+              class="form-control"
+              (change)="checkIsFormReadyToSubmit()"
+            />
+          </neo-form-field>
+          <p
+            class="form-error"
+            *ngIf="
+              f.name.hasError('pattern')
+                ? true
+                : f.projectControl.hasError('pattern')
+            "
+          >
+            Only English letters without spaces
+          </p>
+        </div>
+        <button
+          *ngIf="!isUploadInProgress"
+          class="new-project-button"
+          neo-button
+          (click)="newProjectButtonClickHandler()"
+        >
+          {{ isOldProjects ? "New" : "Choose" }}
+        </button>
+      </neo-card>
+      <mat-spinner
+        class="spinner"
+        color="accent"
+        *ngIf="isUploadInProgress"
+      ></mat-spinner>
+      <div class="form-group" *ngIf="!isUploadInProgress">
+        <div class="file-name" *ngIf="jsonDataFile && jsonDataFile.name">
+          {{ jsonDataFile.name }}
+          <div class="delete-file material-icons" (click)="deleteFile()">
+            close
+          </div>
+        </div>
+        <div class="file-name error-text" *ngIf="jsonError">
+          Data file should have .json extention
+        </div>
+        <div class="file-name attention-text" *ngIf="!isVideo && !jsonDataFile">
+          Property that contain photo name should be "image_name".Owervise case
+          will not be displayed correctly.
+        </div>
+        <input
+          hidden
+          id="json"
+          (change)="onJsonFileChange($event)"
+          type="file"
+          formControlName="json"
+        />
+        <label
+          for="json"
+          class="form-control label"
+          mat-raised-button
+          color="primary"
+          >Choose JSON file</label
+        >
+      </div>
+      <mat-divider
+        *ngIf="(jsonDataFile || images.length > 0) && !isUploadInProgress"
+      ></mat-divider>
+      <div class="form-group" *ngIf="!isUploadInProgress">
+        <input
+          hidden
+          id="file"
+          (change)="onFileChange($event)"
+          [multiple]="!isVideo"
+          type="file"
+          formControlName="file"
+        />
+        <label
+          for="file"
+          class="form-control label"
+          mat-raised-button
+          color="primary"
+          >Choose {{ isVideo ? "video" : "photos" }}
+        </label>
+      </div>
+      <div class="file-name error-text" *ngIf="imageError">
+        You can load only {{ isVideo ? "mp4 video" : "images" }}
+      </div>
+      <div *ngIf="images.length > 0" class="preview-wrapper">
+        <ng-container *ngIf="isVideo && !isUploadInProgress">
+          <div
+            class="preview-container_video"
+            matTooltip="{{ images[0].name }}"
+          >
+            <video class="hide-from-view"></video>
+            <canvas class="preview-video"></canvas>
+            <div class="preview-delete material-icons" (click)="deletePhoto(0)">
+              close
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="!isVideo && !isUploadInProgress">
+          <div
+            class="preview-container"
+            *ngFor="let url of images; let i = index"
+            matTooltip="{{ url.name }}"
+          >
+            <img class="preview-photo" [src]="url.data" /> <br />
+            <div class="preview-delete material-icons" (click)="deletePhoto(i)">
+              close
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </form>
+  </div>
+  <div mat-dialog-actions class="dialog-actions">
+    <button
+      neo-button
+      (click)="onNoClick()"
+      class="dialog-actions__button"
+      [disabled]="isUploadInProgress"
+    >
+      {{ data.buttons.no }}
+    </button>
+    <button
+      neo-button
+      color="primary"
+      (click)="onYesClick()"
+      class="dialog-actions__button"
+      cdkFocusInitial
+      [disabled]="notAllData || isUploadInProgress"
+    >
+      {{ data.buttons.yes }}
+    </button>
+    <mat-error *ngIf="notAllData">
+      All fields are required
+    </mat-error>
+    <p *ngIf="isUploadInProgress">
+      Wait for downloading. It's may take time...
+    </p>
+  </div>
+</div>

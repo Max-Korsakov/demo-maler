@@ -1,0 +1,68 @@
+.wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(104, 103, 103, 0.26);
+      border-radius: 10px;
+      background-clip: content-box;
+      border: 2px solid transparent;
+    }
+  }
+  
+  .table-row {
+    width: 100%;
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-weight: 22px;
+  }
+  
+  .table-one-wrapper {
+    margin-top: 50px;
+  }
+  
+  .table-two-wrapper {
+    margin-top: 50px;
+  }
+  .cell {
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid rgb(206, 205, 205);
+  }
+  
+  :host {
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(104, 103, 103, 0.26);
+      border-radius: 10px;
+      background-clip: content-box;
+      border: 2px solid transparent;
+    }
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .emotions {
+    width: 100%;
+  }
+  

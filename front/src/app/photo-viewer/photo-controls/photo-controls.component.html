@@ -1,0 +1,48 @@
+  
+      <div class="data-time">
+        <div class="text-data">
+          Current image: {{ currentFrameView + 1 +'/' + photoArrayLength }}
+        </div>
+      </div>
+      <div class="controllers-wrapper">
+        <div class="play-controllers">
+          <div class="seek-controllers">
+            <div class="seeking-form">
+              <mat-form-field>
+                <input
+                  type="number"
+                  [(ngModel)]="seekingFrame"
+                  matInput
+                  placeholder="Frame"
+                />
+              </mat-form-field>
+              <button
+                mat-raised-button
+                (click)="findFrame()"
+                class="control_button"
+              >
+                Find Frame
+              </button>
+            </div>
+          </div>
+          <div class="play-buttons">
+            <div class="flex">
+              <button
+                mat-raised-button
+                (click)="goToPreviousFrame()"
+                class="control_button small_font"
+              >
+                Previous Frame
+              </button>
+
+              <button
+                mat-raised-button
+                (click)="goToNextFrame()"
+                class="control_button small_font"
+              >
+                Next Frame
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>

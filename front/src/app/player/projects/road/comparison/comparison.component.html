@@ -1,0 +1,19 @@
+<div id="trafficChart"></div>
+<p>Checked frames: {{ checkedFrames }}</p>
+<!-- <p>Total checkpoints: {{ correctionData.checkpoints.length  }}</p> -->
+<div class="errors" *ngIf="framesWithError && isErrors;else noErrors">
+  <div class="row" *ngFor="let row of framesWithError; let i = index">
+    <div class="error-wrapper" *ngIf="row.length > 0">
+      <p>Row: {{i + 1}}</p>
+      <div class="error" *ngFor="let error of row">
+        Range: {{ error.range }}
+        <p>Type: {{ error.type }}</p>
+        Correct data: {{ error.correctData }}
+        <p>Model data: {{ error.data }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noErrors>
+  <div class='no-errors'>No errors at checked range</div>
+</ng-template>

@@ -1,0 +1,16 @@
+<a mat-fab class="setting-button" (click)="changeMode()">
+  <i matTooltip="Switch to Photo mode" *ngIf="isVideo" class="material-icons">
+    camera_alt
+  </i>
+  <i matTooltip="Switch to Video mode" *ngIf="!isVideo" class="material-icons">
+    videocam
+  </i>
+</a>
+
+<a mat-fab class="add-button" matTooltip="Add new case" (click)="addNewCase()">
+  <i class="material-icons">
+    add
+  </i>
+</a>
+<app-video *ngIf="isVideo"></app-video>
+<app-photo *ngIf="!isVideo"></app-photo>

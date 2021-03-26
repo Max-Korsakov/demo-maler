@@ -1,0 +1,33 @@
+<div class='wrapper'>
+  <div class="table-one-wrapper"  *ngIf="datasetFrameElement">
+    <p *ngIf ='datasetFrameElement.logos.data && datasetFrameElement.logos.data.length'>{{datasetFrameElement.logos.title}}</p>
+    <div
+      class="table-row"
+      *ngFor="let item of datasetFrameElement.logos.data"
+    >
+      <div class="property cell">
+        <p>{{ item.description }}</p>
+      </div>
+      <div class="data cell">
+        <p>{{ item.score }}</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="table-two-wrapper" *ngIf="datasetFrameElement">
+    <p  *ngIf ='datasetFrameElement.labels.data && datasetFrameElement.labels.data.length'>{{datasetFrameElement.labels.title}}</p>
+    <div
+      class="table-row"
+      *ngFor="let item of datasetFrameElement.labels.data"
+    >
+      <div class="property cell">
+        <p>{{ item.description }}</p>
+      </div>
+      <div class="data cell">
+        <p>{{ item.score }}</p>
+      </div>
+    </div>
+  </div>  
+</div>
+
+

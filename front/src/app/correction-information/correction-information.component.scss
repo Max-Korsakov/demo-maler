@@ -1,0 +1,57 @@
+.correction-information__layout {
+	overflow: auto;
+  max-height: 90vh;
+}
+
+.correction-information__layout::-webkit-scrollbar {
+  width: 10px;
+}
+
+.correction-information__layout::-webkit-scrollbar-thumb {
+  background-color: rgba(104, 103, 103, .3);
+  border-radius: 10px;
+  background-clip: content-box;
+  border: 2px solid transparent;
+}
+
+.correction-information__lable {
+  font-size: 1rem;
+}
+
+.form__comment-input-field {
+  width: 100%;
+  font-size: 1rem;
+}
+
+.form__widget-btns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.correction-information__frame-subtitle {
+	font-size: 1rem;
+}
+
+.control_button {
+  cursor: pointer;
+  margin: 5px 10px;
+  width: 100px;
+  height: 30px;
+  border-radius: 4px;
+  color: white;
+  background-color: rgb(196, 194, 194);
+
+  &-long{
+    width: 150px;
+  }
+}
+.control_button:hover {
+  background-color: rgb(104, 103, 103);
+}
+
+.warn {
+  background-color: rgba(255,0,0,0.3);
+}
+.warn:hover {
+  background-color: rgba(255,0,0,0.8);
+}

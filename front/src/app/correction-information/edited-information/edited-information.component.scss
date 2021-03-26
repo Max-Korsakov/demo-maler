@@ -1,0 +1,36 @@
+.edited-information__values {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	font-size: 1rem;
+}
+
+.edited-information__lable {
+	height: 5px;
+	width: 30px;
+
+	&-title{
+		width: 100%;
+	}
+}
+
+.edited-information__divider {
+	width: 100%;
+}
+
+.edited-information {
+display: flex;
+margin: 5px 0;
+justify-content: space-between;
+align-items: center;
+height: 40px;
+color: rgb(190, 190, 190);
+	&__text {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.changed {
+	color: rgb(104, 103, 103);
+}

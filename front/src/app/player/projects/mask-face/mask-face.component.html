@@ -1,0 +1,27 @@
+<div class="wrapper" *ngIf="datasetFrameElement">
+  <div
+    class="table-one-wrapper"
+    *ngFor="let element of datasetFrameElement.last_1sec_data; let i = index"
+    [ngStyle]="changeBackground(i)"
+  >
+    <div class="table-row">
+      <div class="cell" *ngIf="element.img_demo_path">
+        <img src="../../../../assets/mask-face/{{element.img_demo_path}}" />
+      </div>
+      <div class="cell" >
+        <p *ngIf ='element.person !== "-"'>{{ element.person }}</p>
+        <p *ngIf ='element.person === "-"'>Person</p>
+      </div>
+      <div class="cell" >
+        <p *ngIf="element.mean_score">{{ element.mean_score }}</p>
+        <p *ngIf="!element.mean_score">-</p>
+      </div>
+      <div class="cell" >
+        <p *ngIf="element.found_in_frames">{{ element.found_in_frames }}</p>
+      </div>
+      <div class="cell" *ngIf="element.tool">
+        <p >{{ element.tool }}</p>
+      </div>
+    </div>
+  </div>
+</div>

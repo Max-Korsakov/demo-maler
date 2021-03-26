@@ -1,0 +1,46 @@
+<div class="wrapper">
+    <div class="container-two">
+  <ng-template #dynamicContainer></ng-template>
+      <div #workField class="work-field">
+        <div class="table-wrapper" *ngIf = 'myTable.length > 0'>
+          <table class="table">
+            <tr class="table-row table-header" *ngIf = 'tableTitle.length > 0'>
+              <td class="table-column" *ngFor = 'let title of tableTitle; let i = index'>{{title}}</td>
+            </tr>
+            <tr class="table-row">
+              <td class="table-column" *ngFor = 'let item of myTable; let i = index'>{{tableContent[i]}}</td>
+            </tr>
+          </table>
+        </div>
+          <div
+          class="text-content"
+          *ngFor="let text of myTexts; let i = index"
+          contenteditable="true"
+          cdkDrag
+        >
+          <div class="content"></div>
+          {{ text }}
+        </div>
+  
+        <app-coworking *ngIf = 'isCoworking'></app-coworking>
+  
+        <div
+          class="square"
+          *ngFor="let item of myData; let i = index"
+          contenteditable="true"
+          cdkDrag
+          [class.busy]= "content[i] === true"
+          [class.free] = "content[i] === false"
+        >
+          <div class="content"></div>
+          {{ content[i] }}
+        </div>
+      </div>
+      <div class="elements">
+        <div class="square menu_item" (click)="createSquare()">+</div>
+        <div class="text-content menu_item" (click)="createText()"><p>Add text</p></div>
+        <div class="table-content menu_item" (click)="createTable()"><p>Add table</p></div>
+        <div class="table-content menu_item" (click)="createChart()"><p>Add chart</p></div>
+      </div>
+    </div>
+  </div>

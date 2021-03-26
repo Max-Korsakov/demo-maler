@@ -1,0 +1,27 @@
+<div class="content">
+  <a mat-fab class="setting-button" (click)="updateSettings()">
+    <i class="material-icons">
+      build
+    </i>
+  </a>
+  <a class="close-button" mat-fab routerLink="/">
+    <i class="material-icons">
+      close
+    </i></a
+  >
+  <div class="content_video">
+    <neo-card class="video-wrapper">
+      <app-player-view *ngIf="dataSrc"></app-player-view>
+    </neo-card>
+    <neo-card class="data-wrapper">
+      <app-player-controls></app-player-controls>
+    </neo-card>
+  </div>
+  <div class="content_info">
+    <neo-card class="wrapper">
+      <div class="router-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </neo-card>
+  </div>
+</div>

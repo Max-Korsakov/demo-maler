@@ -1,0 +1,245 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: whitesmoke;
+}
+
+.dialog-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 6rem;
+  padding: 0 3.5rem 0 3.5rem;
+  background-color: rgb(26, 156, 176);
+  color: white;
+}
+
+.dialog-content {
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.input-wrapper {
+  margin: 20px 20px;
+  padding: 5px 10px;
+  background-color: whitesmoke;
+  border-radius: 5px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: space-around !important;
+  margin-bottom: 3rem !important;
+  padding: 0 3rem 0 3rem !important;
+
+  &__button {
+    width: 45%;
+  }
+}
+
+.preview-wrapper {
+  display: flex;
+  width: 100%;
+  height: 210px;
+  max-height: 210px;
+  flex-wrap: wrap;
+  position: relative;
+  justify-content: space-around;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(104, 103, 103, 0.26);
+    border-radius: 10px;
+    background-clip: content-box;
+    border: 2px solid transparent;
+  }
+}
+
+.preview-container {
+  position: relative;
+  height: 200px;
+  width: 30%;
+  margin: 2% 0;
+  box-sizing: border-box;
+
+  &_video {
+    display: flex;
+    flex-direction: column;
+    justify-items: flex-end;
+    box-sizing: border-box;
+    position: relative;
+    width: fit-content;
+    height: auto;
+
+    &:hover div.preview-delete {
+      visibility: visible;
+      z-index: 99;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
+      opacity: 1;
+      background-color: rgba(256, 256, 256, 0.7);
+      border-radius: 5px;
+    }
+  }
+
+  &:hover div.preview-delete {
+    visibility: visible;
+    z-index: 99;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    opacity: 1;
+    background-color: rgba(256, 256, 256, 0.7);
+    border-radius: 5px;
+  }
+}
+
+.spinner{
+  margin-left: 42%;;
+  margin-top: 10%;
+}
+
+.preview-delete {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.3s linear;
+}
+
+.preview-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form {
+  width: 100%;
+  height: 40%;
+}
+.form-header {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.form-group {
+  height: 25%;
+  min-height: 70px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+mat-form-field{
+  margin-top: 10px;
+}
+
+.data-wrapper,
+.name-wrapper {
+  overflow: hidden;
+  padding: 5px;
+  width: 50%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+}
+
+.file-name {
+  display: flex;
+  padding-left: 50px;
+  flex: 1;
+  font-weight: bold;
+  position: relative;
+}
+
+.delete-file {
+  cursor: pointer;
+  height: 100%;
+  position: relative;
+  top: 0;
+  right: -5px;
+  &:hover {
+    transform: scale(1.2);
+    border-radius: 5px;
+    background-color: rgba(256, 256, 256, 0.7);
+  }
+}
+
+.label {
+  background-color: whitesmoke;
+  overflow: hidden;
+  border-radius: 5px;
+  padding: 0 5px;
+  margin: 0 20px 0 30px;
+  border: 1px solid lightgray;
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  &:hover {
+    background-color: lightgray;
+  }
+}
+
+.attention-text{
+font-size: 13px;
+}
+
+.data-wrapper {
+  background-color: whitesmoke;
+  border-radius: 5px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 0 10px 30px;
+}
+
+.new-project-button {
+  margin-top: 5px;
+  height: 10%;
+  min-width: 80px;
+}
+
+::ng-deep.mat-form-field-infix {
+  border-top: 0 !important;
+}
+
+.error-text {
+  color: red;
+}
+
+.form-error {
+  font-size: 12px;
+  color: red;
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+}
+
+.hide-from-view {
+  position: absolute;
+  top: -9999px !important;
+}

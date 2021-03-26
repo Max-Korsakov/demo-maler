@@ -1,0 +1,25 @@
+<neo-card class="category-item" (click)="chooseCase()">
+  <neo-card-header>
+    <neo-card-title>{{ caseName }}</neo-card-title>
+  </neo-card-header>
+
+  <div
+    class="card-delete card-icon material-icons"
+    (click)="deleteCase($event)"
+  >
+    close
+  </div>
+
+  <img
+    neo-card-image
+    *ngIf="postersLink"
+    [src]="postersLink"
+    alt="poster is not available"
+  />
+  <!-- <img
+      class="poster-image"
+      *ngIf="postersLink"
+      [src]="postersLink"
+      alt="poster is not available"
+    /> -->
+</neo-card>

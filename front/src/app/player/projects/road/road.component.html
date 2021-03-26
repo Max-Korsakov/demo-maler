@@ -1,0 +1,253 @@
+<div class="header">
+  <h3>{{ mode === "editor" ? "Editor mode" : "Comparison mode" }}</h3>
+  <neo-slide-toggle (change)="toggleMode($event)">
+    Comparison mode
+  </neo-slide-toggle>
+</div>
+<div
+  class="title-wrapper"
+  *ngIf="
+    dataFromModel &&
+    dataFromModel.length > 0 &&
+    currentFrameView &&
+    mode === 'editor'
+  "
+>
+  <p>Data from frame: {{ datasetFrameElement.frame_number }}</p>
+</div>
+<neo-card
+  class="data-wrapper"
+  *ngIf="
+    datasetFrameElement &&
+    dataFromModel && dataFromModel.length > 0 &&
+    currentFrameView &&
+    datasetFrameElement.frame_data &&
+    mode === 'editor'
+  "
+>
+  <h3 class="data-title">Road</h3>
+  <div
+    class="road-data"
+    *ngFor="
+      let roadRow of datasetFrameElement.frame_data.car_counter;
+      let i = index
+    "
+    [class.first]="i === 0 || i === 3"
+    [class.second]="i === 1 || i === 4"
+    [class.third]="i === 2 || i === 5"
+  >
+    <div class="row-check">
+      <p class="row-check-title">Row {{ i + 1 }}</p>
+      <neo-checkbox
+        [style.opacity]="0.8"
+        color="primary"
+        [(ngModel)]="showingRowsConfig[i]"
+        [disabled]="(isVideoPlay$ | async) || !correctFrameForSavingCheckbox"
+        (change)="handleRowAvailabilityChange()"
+      ></neo-checkbox>
+    </div>
+    <div
+      class="data-cars"
+      (click)="chooseElement(i, 'car')"
+      (focusout)="onFocusOut(-1)"
+      tabindex="1"
+      [class.show-row]="!showingRowsConfig[i]"
+    >
+      <i class="material-icons">
+        directions_car
+      </i>
+      <input
+        *ngIf="showingRowsConfig[i]"
+        #titleInput
+        type="number"
+        class="input-form"
+        [value]="roadRow.car"
+        (focusout)="onFocusOut(titleInput.value)"
+        [disabled]="!correctFrameForSavingCheckbox"
+        min="0"
+      />
+      <div
+        class=" button-wrapper"
+        *ngIf="showingRowsConfig[i] && chosenRow === i && chosenType === 'car' && correctFrameForSavingCheckbox"
+      >
+        <div
+          class="number_button left"
+          (click)="decrementNumber()"
+          (mousedown)="preventFocusLose()"
+        >
+          - 1
+        </div>
+        <div
+          class="number_button right"
+          (click)="incrementNumber()"
+          (mousedown)="preventFocusLose()"
+        >
+          + 1
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="data-trucks"
+      (click)="chooseElement(i, 'bus/truck')"
+      (focusout)="onFocusOut(-1)"
+      tabindex="1"
+      [class.show-row]="!showingRowsConfig[i]"
+    >
+      <i class="material-icons">
+        directions_bus
+      </i>
+      <input
+        #titleInput
+        *ngIf="showingRowsConfig[i]"
+        type="number"
+        class="input-form"
+        [value]="roadRow['bus/truck']"
+        [disabled]="!correctFrameForSavingCheckbox"
+        (focusout)="onFocusOut(titleInput.value)"
+        min="0"
+      />
+      <div
+        class=" button-wrapper"
+        *ngIf="
+          showingRowsConfig[i] && chosenRow === i && chosenType === 'bus/truck' && correctFrameForSavingCheckbox
+        "
+      >
+        <div
+          class="number_button left"
+          (click)="decrementNumber()"
+          (mousedown)="preventFocusLose()"
+        >
+          - 1
+        </div>
+        <div
+          class="number_button right"
+          (click)="incrementNumber()"
+          (mousedown)="preventFocusLose()"
+        >
+          + 1
+        </div>
+      </div>
+    </div>
+  </div>
+</neo-card>
+
+<neo-card
+  class="log-wrapper"
+  *ngIf="dataFromModel && dataFromModel.length > 0 && mode === 'editor'"
+>
+  <h3 class="log">Flags</h3>
+  <div class="table-row">
+    <div class="table-item number">#</div>
+    <div class="table-item">Frame id</div>
+    <div class="table-item">Current time</div>
+    <div class="table-item">Correction</div>
+    <div class="table-item">Frame ranges</div>
+    <div class="table-item">Time ranges</div>
+    <div class="table-item">Notes</div>
+    <mat-icon
+      *ngIf="applyingFrames"
+      (click)="applyingFramesToggle()"
+      class="log__widget-btn"
+      matTooltip="Unlock affect on forward frames"
+    >
+      lock
+    </mat-icon>
+    <mat-icon
+      *ngIf="!applyingFrames"
+      (click)="applyingFramesToggle()"
+      class="log__widget-btn"
+      matTooltip="Lock affect on forward frames"
+    >
+      lock_open
+    </mat-icon>
+  </div>
+  <ul class="table-wrapper" *ngIf="correctionInformation">
+    <li
+      *ngFor="
+        let checkPoint of correctionInformation.frameDataRoad;
+        let i = index
+      "
+      class="table-row"
+    >
+      <div class="table-item number">{{ i + 1 }}</div>
+      <div class="table-item">{{ checkPoint.frame_number }}</div>
+      <div class="table-item">{{ checkPoint.currentTime }}</div>
+      <div class="table-item">{{ checkPoint.correction }}</div>
+      <div class="table-item">
+        {{ checkPoint.frameRanges[0] }} - {{ " " + checkPoint.frameRanges[1] }}
+      </div>
+      <div class="table-item">
+        {{ checkPoint.timeRanges[0].toFixed(3) }} -
+        {{ " " + checkPoint.timeRanges[1].toFixed(3) }}
+      </div>
+      <div class="table-item">
+        <mat-icon
+          (click)="showWidget(i)"
+          class="log__widget-btn"
+          matTooltip="Notes"
+        >
+          list_alt
+        </mat-icon>
+        <neo-checkbox
+          (change)="applyRangeBefore($event, i)"
+          [style.opacity]="0.8"
+          color="primary"
+          matTooltip="Apply changes for all frames before"
+        >
+        </neo-checkbox>
+      </div>
+    </li>
+  </ul>
+  <app-widget
+    *ngIf="widgetShown"
+    (closeWidget)="closeWidget()"
+    [header]="getWidgetHeader()"
+  >
+    <app-correction-information
+      (saveComment)="saveComment($event)"
+      (deleteCheckpoint)="deleteCheckpoint($event)"
+      [correctionInformation$]="correctionInformation$"
+      [frameIndex]="currentFrameTableIndex"
+    >
+    </app-correction-information>
+  </app-widget>
+</neo-card>
+<div
+  class="control-button_wrapper"
+  *ngIf="
+    dataFromModel &&
+    dataFromModel.length > 0 &&
+    currentFrameView &&
+    datasetFrameElement &&
+    mode === 'editor'
+  "
+>
+<button neo-button class="control_button" (click)="startNewGoldenSetFromZero()">
+  New set
+</button>
+  <button
+    [disabled]="(isVideoPlay$ | async) || !correctFrameForSavingCheckbox"
+    neo-button
+    class="control_button"
+    (click)="addCheckPoint()"
+  >
+    Add checkpoint
+  </button>
+  <button neo-button class="control_button" (click)="saveStandardData()">
+    Save
+  </button>
+  <button
+    neo-button
+    class="control_button"
+    (click)="resetCheckpoints()"
+  >
+    Reset changes
+  </button>
+</div>
+<ng-template #noDataSign>
+  <div class="no-data">No binding data</div>
+</ng-template>
+<div *ngIf="mode === 'comparison'" class='comparison'>
+  <app-comparison></app-comparison>
+</div>

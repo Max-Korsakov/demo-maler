@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-subtitle class="edited-information__lable-title">
+    Edited information
+  </mat-card-subtitle>
+  <div class="edited-information__values">
+    <div class="edited-information">
+      <mat-card-subtitle class="edited-information__lable">
+          Old:
+      </mat-card-subtitle>
+      <div class="edited-information__text" *ngFor="let counter of getOldCarCounter(); let i = index">
+        <span [class.changed] = "getNewCarCounter()[i].car !== getOldCarCounter()[i].car">
+          <!-- {{ i + 1 }}: -->
+          <i class="material-icons">
+            directions_car
+          </i>
+          {{ counter.car }}
+        </span>
+        <span [class.changed] = "getNewCarCounter()[i]['bus/truck'] !== getOldCarCounter()[i]['bus/truck']">
+          <i class="material-icons">
+            directions_bus
+          </i>
+          {{ counter['bus/truck'] }}
+        </span>
+      </div>
+    </div>
+    <mat-divider class="edited-information__divider"></mat-divider>
+    <div class="edited-information">
+      <mat-card-subtitle class="edited-information__lable">
+        New:
+      </mat-card-subtitle>
+      <div class="edited-information__text" *ngFor="let counter of getNewCarCounter(); let i = index">
+        <span [class.changed] = "getNewCarCounter()[i].car !== getOldCarCounter()[i].car">
+          <i class="material-icons">
+            directions_car
+          </i>
+          {{ counter.car }}
+        </span>
+        <span [class.changed] = "getNewCarCounter()[i]['bus/truck'] !== getOldCarCounter()[i]['bus/truck']">
+          <i class="material-icons">
+            directions_bus
+          </i>
+          {{ counter['bus/truck'] }}
+        </span>
+      </div>
+    </div>
+  </div>
+</mat-card>

@@ -1,0 +1,28 @@
+<div class="wrapper" *ngIf="datasetFrameElement">
+  <div class="table-one-wrapper">
+    <div class="table-row">
+      <div class="cell first-cell">
+        <p>Detected Front|Back Windows</p>
+      </div>
+      <div class="cell second-cell">
+        <p>{{ datasetFrameElement["Detected Front|Back Windows"] }}</p>
+      </div>
+    </div>
+    <div class="table-row">
+      <div class="cell first-cell">
+        <p>Detected Side Windows</p>
+      </div>
+      <div class="cell second-cell">
+        <p>{{ datasetFrameElement["Detected Side Windows"] }}</p>
+      </div>
+    </div>
+    <div class="table-row white-color" [ngStyle]="changeBackground()">
+      <div class="cell first-cell">
+        <p>Broken Window</p>
+      </div>
+      <div class="cell second-cell">
+        <p>{{ datasetFrameElement["Broken Window"].window }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,207 @@
+<div class="wrapper">
+  <ng-container *ngIf="videoTitle === 'GCPVisionAPI'">
+    <div class="table-one-wrapper">
+      <div class="table-row" *ngIf="datasetFrameElement">
+        <div class="property cell"><p>tom_last_1sec_perc</p></div>
+        <div class="data cell">
+          <p>{{ datasetFrameElement.tom_last_1sec_perc }}</p>
+        </div>
+      </div>
+      <div class="table-row" *ngIf="datasetFrameElement">
+        <div class="property cell"><p>eiffel_last_1sec_perc</p></div>
+        <div class="data cell">
+          <p>{{ datasetFrameElement.eiffel_last_1sec_perc }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="table-two-wrapper" *ngIf="datasetFrameElement">
+      <div
+        class="table-row"
+        *ngFor="let item of datasetFrameElement.last_1sec_data"
+      >
+        <div class="property cell">
+          <p>{{ item.description }}</p>
+        </div>
+        <div class="data cell">
+          <p>{{ item.mean_score }}</p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="wrapper">
+    <ng-container *ngIf="videoTitle === 'GCPCelebrities'">
+      <div
+        class="table-one-wrapper"
+        *ngIf="datasetFrameElement && datasetFrameElement.celebrities"
+      >
+        <div
+          class="table-row"
+          *ngFor="let cel of datasetFrameElement.celebrities"
+        >
+          <div class="property cell">
+            <p>{{ cel.text }}</p>
+          </div>
+          <div class="data cell">
+            <p>{{ cel.score }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="videoTitle === 'MSMediaIndexer'">
+      <ng-container
+        *ngIf="
+          datasetFrameElement &&
+          datasetFrameElement.faces &&
+          datasetFrameElement.faces.length > 0
+        "
+      >
+        <div class="table-one-wrapper">
+          <div class="table-row">
+            <div class="property cell">
+              <p>Name</p>
+            </div>
+            <div class="property cell">
+              <p>Confidence:</p>
+            </div>
+          </div>
+
+          <div class="table-row" *ngFor="let item of datasetFrameElement.faces">
+            <div class="data cell">
+              <p>{{ item.name }}</p>
+            </div>
+            <div class="data cell">
+              <p>{{ item.confidence }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container
+        *ngIf="datasetFrameElement && datasetFrameElement.emotions.length > 0"
+      >
+        <div class="table-one-wrapper">
+          <div class="table-row">
+            <div class="property cell emotions">
+              <p>Emotion</p>
+            </div>
+          </div>
+
+          <div
+            class="table-row"
+            *ngFor="let item of datasetFrameElement.emotions"
+          >
+            <div class="data cell emotions">
+              <p>{{ item.type }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container
+        *ngIf="datasetFrameElement && datasetFrameElement.topics.length > 0"
+      >
+        <div class="table-two-wrapper" *ngIf="datasetFrameElement">
+          <div class="table-row">
+            <div class="property cell">
+              <p>Label</p>
+            </div>
+            <div class="property cell">
+              <p><strong>Confidence:</strong></p>
+            </div>
+          </div>
+          <div
+            class="table-row"
+            *ngFor="let item of datasetFrameElement.topics"
+          >
+            <div class="property cell">
+              <p>{{ item.name }}</p>
+            </div>
+            <div class="data cell">
+              <p>{{ item.confidence }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+
+    <ng-container *ngIf="videoTitle === 'GCPCelebritiesAndWebEntities'">
+      <ng-container
+        *ngIf="
+          datasetFrameElement &&
+          datasetFrameElement.faces &&
+          datasetFrameElement.faces.length > 0
+        "
+      >
+        <div class="table-one-wrapper">
+          <div class="table-row">
+            <div class="property cell">
+              <p>Name</p>
+            </div>
+            <div class="property cell">
+              <p>Confidence:</p>
+            </div>
+          </div>
+
+          <div class="table-row" *ngFor="let item of datasetFrameElement.faces">
+            <div class="data cell">
+              <p>{{ item.name }}</p>
+            </div>
+            <div class="data cell">
+              <p>{{ item.confidence }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container
+        *ngIf="datasetFrameElement && datasetFrameElement.celebrities && datasetFrameElement.celebrities.length > 0"
+      >
+        <div class="table-one-wrapper">
+          <div class="table-row">
+            <div class="property cell celebrities">
+              <p>celebrities</p>
+            </div>
+          </div>
+
+          <div
+            class="table-row"
+            *ngFor="let item of datasetFrameElement.celebrities"
+          >
+            <div class="data cell celebrities">
+              <p>{{ item.text }}</p>
+            </div>
+            <div class="data cell celebrities">
+              <p>{{ item.score }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container
+        *ngIf="datasetFrameElement && datasetFrameElement.web_entities && datasetFrameElement.web_entities.length > 0"
+      >
+        <div class="table-two-wrapper" *ngIf="datasetFrameElement">
+          <div class="table-row">
+            <div class="property cell">
+              <p>web_entities</p>
+            </div>
+          </div>
+          <div
+            class="table-row"
+            *ngFor="let item of datasetFrameElement.web_entities"
+          >
+            <div class="property cell">
+              <p>{{ item.text }}</p>
+            </div>
+            <div class="data cell">
+              <p>{{ item.score }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

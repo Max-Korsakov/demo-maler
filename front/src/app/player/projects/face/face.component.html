@@ -1,0 +1,55 @@
+<div class="table-one-wrapper">
+  <div
+    class="table-row "
+    *ngIf="datasetFrameElement"
+    [class.match]="datasetFrameElement.last_1sec_data[0].match === 'FULL'"
+    [class.mismatch]="datasetFrameElement.last_1sec_data[0].match === 'MISMATCH'"
+    [class.partial-match]="datasetFrameElement.last_1sec_data[0].match === 'PARTIAL'"
+  >
+    <div class="first cell">
+      <img
+        src="../../../assets/face_video_call.epam_team.alexv.jpg"
+        height="58px"
+      />
+    </div>
+    <div class="data cell">
+      <p>
+        Description: {{ datasetFrameElement.last_1sec_data[0].description }}
+      </p>
+    </div>
+    <div class="data cell">
+      <p>mean_score: {{ datasetFrameElement.last_1sec_data[0].mean_score }}</p>
+    </div>
+    <div class="data cell">
+      <p>match: {{ datasetFrameElement.last_1sec_data[0].match }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="table-one-wrapper">
+  <div
+    class="table-row "
+    *ngIf="datasetFrameElement"
+    [class.match]="datasetFrameElement.last_1sec_data[1].match === 'FULL'"
+    [class.mismatch]="datasetFrameElement.last_1sec_data[1].match === 'MISMATCH'"
+    [class.partial-match]="datasetFrameElement.last_1sec_data[1].match === 'PARTIAL'"
+  >
+    <div class="first cell">
+      <img
+        src="../../../assets/face_video_call.epam_team.alexv.jpg"
+        height="58px"
+      />
+    </div>
+    <div class="data cell">
+      <p>
+        Description: {{ datasetFrameElement.last_1sec_data[1].description }}
+      </p>
+    </div>
+    <div class="data cell">
+      <p>mean_score: {{ datasetFrameElement.last_1sec_data[1].mean_score }}</p>
+    </div>
+    <div class="data cell">
+      <p>match: {{ datasetFrameElement.last_1sec_data[1].match }}</p>
+    </div>
+  </div>
+</div>

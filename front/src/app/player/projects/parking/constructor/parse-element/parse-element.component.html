@@ -1,0 +1,53 @@
+
+<div
+  *ngFor ="let key of checkObjectType(mappedData); let i = index"
+  class="filter_element"
+  [ngStyle]="parseData.enable && { 'filter': 'opacity(40%)', 'pointer-events': 'none' }"
+>
+  <div class="filter_element_checkbox" *ngIf="checkIsObject(key);else checkbox" [ngStyle]="parseData.childrenChoosen &&!parseData.choosen && { 'box-shadow': 'inset 0px 0px 8px 3px rgba(0,0,0,0.6)'}" >
+  </div>
+  <div class="filter_element_title">
+    {{ getKeyName(key)}}
+  </div>
+  <div
+    *ngIf="checkIsObject(key); else value"
+    class="filter_element_arrow"
+    (click)="handleExpandClick(path)"
+  >
+    <div class="filter_element_arrow-contaner" (click)="handleArrowClick(key, i)" [ngStyle]="key && { 'background-color': 'rgb(160, 160, 160)'}">
+      <mat-icon *ngIf="!key.isExpanded" class="material-icons filter_element_arrow-icon">
+        keyboard_arrow_right
+      </mat-icon>
+      <i *ngIf="key.isExpanded" class="material-icons filter_element_arrow-icon">
+        keyboard_arrow_down
+      </i> 
+    </div>
+  </div>
+
+  <ng-template #value>
+    <div class="filter_element_value">
+      {{ key[getKeyName(key)]}}
+    </div>
+  </ng-template>
+
+  <ng-template #checkbox>
+    <div class="filter_element_checkbox" [ngStyle]="parseData.childrenChoosen &&!parseData.choosen && { 'box-shadow': 'inset 0px 0px 8px 3px rgba(0,0,0,0.6)'}" >
+      <input
+        type="checkbox"
+        [checked]="parseData.choosen"
+        (change)="clickCheck(key)"
+      />
+    </div>
+  </ng-template>
+
+  <div class="children" *ngIf="checkIsObject(key[getKeyName(key)]) && key.isExpanded">
+    <app-parse-element
+      
+      [parseData]=key[getChildElements(key)]
+      [path]="getChildPath(getKeyName(key))"
+      (onCheck)="handleCheck($event)"
+      (onArrowClick)="handleExpandClick($event)"
+    ></app-parse-element>
+  </div>
+</div>
+

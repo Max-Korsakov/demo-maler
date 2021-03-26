@@ -1,0 +1,48 @@
+stages:
+  - build
+  - push
+
+before_script:
+  - apk add --no-cache curl jq python py-pip
+  - pip install awscli
+  - export AWS_REGION=eu-central-1
+
+frontend:
+  stage: build
+  services:
+  - docker:dind
+  variables:
+    AWS_DEFAULT_REGION: eu-central-1
+    DOCKER_HOST: tcp://localhost:2375/
+    REPOSITORY_URL: 363712795748.dkr.ecr.eu-central-1.amazonaws.com/demo_maker/demo-maker-frontend
+  image: docker
+  script:
+    - $(aws ecr get-login --no-include-email --region eu-central-1)
+    - docker build --network host -t $REPOSITORY_URL:latest front
+    - docker images
+    - docker push $REPOSITORY_URL:latest
+    - echo ${AWS_DEFAULT_REGION}
+    - aws ecs update-service --force-new-deployment --cluster demo-maker --service demo-maker-frontend
+    - aws ecs list-tasks --cluster demo-maker --service demo-maker-frontend | jq -r ".taskArns[]" | awk '{print "aws ecs stop-task --cluster demo-maker --task \""$0"\""}' | sh
+  only:
+    - master
+
+backend:
+  stage: build
+  services:
+  - docker:dind
+  variables:
+    AWS_DEFAULT_REGION: eu-central-1
+    DOCKER_HOST: tcp://localhost:2375/
+    REPOSITORY_URL: 363712795748.dkr.ecr.eu-central-1.amazonaws.com/demo_maker/demo-maker-backend
+  image: docker
+  script:
+    - $(aws ecr get-login --no-include-email --region eu-central-1)
+    - docker build --network host -t $REPOSITORY_URL:latest server
+    - docker images
+    - docker push $REPOSITORY_URL:latest
+    - echo ${AWS_DEFAULT_REGION}
+    - aws ecs update-service --force-new-deployment --cluster demo-maker --service demo-maker-backend
+    - aws ecs list-tasks --cluster demo-maker --service demo-maker-backend | jq -r ".taskArns[]" | awk '{print "aws ecs stop-task --cluster demo-maker --task \""$0"\""}' | sh
+  only:
+    - master

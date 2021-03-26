@@ -1,0 +1,17 @@
+<div class='wrapper' >
+    <div class="table-one-wrapper" >
+      <div class="table-row">
+        <div class=" cell " >
+          <img *ngIf='datasetFrameElement' [src]='modemPhoto'/>
+        </div>
+        <div class=" cell " >
+          <p *ngIf='datasetFrameElement'>{{ datasetFrameElement.model }}</p>
+        </div>
+        <div class=" cell " >
+          <p *ngIf='datasetFrameElement'>{{ datasetFrameElement.mean_score }}</p>
+        </div>
+        <div class=" cell " >
+          <p *ngIf='datasetFrameElement'>{{ datasetFrameElement.count }}</p>
+        </div>
+      </div>
+  </div>

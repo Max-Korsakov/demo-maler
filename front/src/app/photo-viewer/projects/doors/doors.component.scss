@@ -1,0 +1,92 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(104, 103, 103, 0.26);
+      border-radius: 10px;
+      background-clip: content-box;
+      border: 2px solid transparent;
+    }
+  }
+
+  .item{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+  .door-image-wrapper{
+    width: 20%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .name{
+    font-size: 22px;
+  }
+
+  .door-image{
+    height: 150px;
+  }
+  
+  .table-row {
+    width: 100%;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-weight: 22px;
+  }
+  
+  .table-one-wrapper {
+    margin-top: 50px;
+    display: flex;
+    border: 1px solid rgb(206, 205, 205);
+    padding: 10px;
+  }
+  
+ 
+  .cell {
+    width: 50%;
+    height: 50px;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+   
+  }
+  
+  :host {
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(104, 103, 103, 0.26);
+      border-radius: 10px;
+      background-clip: content-box;
+      border: 2px solid transparent;
+    }
+    display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: flex-end;
+  }
+  

@@ -1,0 +1,26 @@
+<div class="container">
+    <div mat-dialog-title class="dialog-header">
+      <h3>{{ data.title }}</h3>
+    </div>
+    <div mat-dialog-content class="dialog-content" *ngIf = 'isOpened; else parsing'>
+   <h3>Parsed object tree</h3>
+       <app-parse-element  [path] ='path' (onCheck)="handleCheck($event)" [parseData] = 'data'></app-parse-element>
+    
+    </div>
+    <div mat-dialog-actions class="dialog-actions" *ngIf = 'isOpened'>
+      <button mat-button (click)="onNoClick()"    cdkFocusInitial class="dialog-actions__button">
+        {{ data.buttons.no }}
+      </button>
+      <button
+        mat-button
+        color = "warn"
+        (click)="onYesClick()"
+        class="dialog-actions__button"
+      >
+        {{ data.buttons.yes }}
+      </button>
+    </div>
+  </div>
+  <ng-template #parsing>
+    <div class = 'parsing'>Parsing...</div>
+  </ng-template>

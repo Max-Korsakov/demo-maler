@@ -1,0 +1,26 @@
+<div class="content">
+  <a class="close-button" mat-fab routerLink="/">
+    <i class="material-icons">
+      close
+    </i></a
+  >
+  <div class="content_video">
+    <mat-card class="photo-wrapper">
+      <img
+        class="image"
+        [src]="currentPhotoURL"
+        onerror="this.src='../../assets/404.jpg';"
+      />
+    </mat-card>
+    <mat-card class="data-wrapper">
+     <app-photo-controls></app-photo-controls>
+    </mat-card>
+  </div>
+  <div class="content_info">
+    <mat-card class="wrapper">
+      <div class="router-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-card>
+  </div>
+</div>

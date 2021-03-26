@@ -1,0 +1,45 @@
+<div class="content">
+  <div class="content_catalog">
+    <mat-card class="categories-wrapper">
+      <div class="block-header">
+        <h3>Projects</h3>
+      </div>
+
+      <div class="categories">
+        <div
+          class="categories-item"
+          *ngFor="let project of photoProjects"
+          (click)="chooseCategory(project)"
+        >
+          {{ project }}
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  <div class="content_info">
+    <mat-card class="wrapper">
+      <div class="block-header">
+        <h3>Photo cases</h3>
+        <div class="chosen-category" *ngIf="chosenProject">
+          {{ chosenProject }}
+        </div>
+      </div>
+
+      <div class="video-wrapper">
+        <div class="no-video" *ngIf="!isLoading && photoCases && photoCases.length === 0">
+          Project not chosen or no cases in project
+        </div>
+        <mat-spinner color='accent' diameter ='70' class="cases-loading" *ngIf="isLoading"></mat-spinner>
+        <ng-container *ngIf="photoCases">
+          <app-case-card
+            *ngFor="let caseName of photoCases; let i = index"
+            [caseName]="caseName"
+            [postersLink]="postersLink[i]"
+            (onCaseChoose)="choosePhotoCase($event)"
+            (onCaseDelete)="deleteCase($event)"
+          ></app-case-card>
+        </ng-container>
+      </div>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+.widget__layout {
+  min-width: 420px;
+}
+
+.widget__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  color: #686767;
+  margin: 0px;
+}
+
+.widget__btn-close {
+  color: #686767;
+}
+
+.widget__btn-close:hover {
+  cursor: pointer;
+	color: red;
+}

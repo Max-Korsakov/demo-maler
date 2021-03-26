@@ -1,0 +1,15 @@
+<ng-template #widget="cdkPortal" cdkPortal>
+  <div class="widget__layout">
+    <mat-card>
+      <h3 class="widget__header" *ngIf="header">
+        {{ header }} 
+        <button (click)="onCloseWidget()" mat-icon-button class="widget__btn-close">
+          <mat-icon>close</mat-icon>
+        </button>
+      </h3>
+      <mat-card-content>
+        <ng-content></ng-content>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-template>

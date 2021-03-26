@@ -1,0 +1,37 @@
+.setting-button{
+  position: absolute;
+  top: 85px;
+  right: 20px;
+  background-color: grey;
+  color: white;
+  z-index: 999;
+}
+
+.add-button {
+  position: absolute;
+  bottom: 65px;
+  right: 20px;
+  background-color:rgb(26, 156, 176);;
+  color: white;
+  z-index: 999;
+}
+
+.new-project-button {
+  position: absolute;
+  bottom: 135px;
+  right: 25px;
+  background-color:rgb(26, 156, 176);;
+  color: white;
+  z-index: 999;
+}
+
+.new-case-button {
+  position: absolute;
+  bottom: 190px;
+  right: 25px;
+  background-color:rgb(26, 156, 176);;
+  color: white;
+  z-index: 999;
+}
+
+

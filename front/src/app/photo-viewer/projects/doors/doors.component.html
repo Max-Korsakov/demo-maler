@@ -1,0 +1,26 @@
+<a *ngIf='photoCase === "HouseProductSearch" && datasetFrameElement' href='http://localhost:4200/photoviewer/HousingProducts/HouseProductCatalog' target="_blank">All products</a>
+<div class="wrapper" *ngIf="datasetFrameElement">
+  <div
+    class="table-one-wrapper"
+    *ngFor="let item of datasetFrameElement.results"
+  >
+    <div class='item'>
+      <div class="table-row">
+        <p class="name"><strong>{{ item.name }}</strong></p>
+      </div>
+      <div class="table-row">
+        <div class="cell">
+          <p>
+            <a [href]="'//' + item.ecommerce_url" target="_blank">Shop link</a>
+          </p>
+        </div>
+        <div class="cell">
+          <p>Price: {{ item.ecommerce_price }}</p>
+        </div>
+      </div>
+    </div>
+    <div class='door-image-wrapper'>
+        <img class='door-image' [src] ="'../../../assets/door_samples/'+ item.imgs[0].demo_path" >
+    </div>
+  </div>
+</div>

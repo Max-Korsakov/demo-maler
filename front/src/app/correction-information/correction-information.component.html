@@ -1,0 +1,33 @@
+<div class="correction-information__layout">
+  <app-video-screenshot [videoTime]="getVideoTime()"></app-video-screenshot>
+  <mat-card>
+    <mat-card-subtitle class="correction-information__frame-subtitle">
+      Frame information
+    </mat-card-subtitle>
+    <p class="correction-information__lable">
+      Frame number: {{ getFrameNumber() }}
+    </p>
+    <p class="correction-information__lable">
+      Current time: {{ getVideoTime() }}
+    </p>
+  </mat-card>
+  <app-range-information [frameRange]="getFrameRange()" [timeRange]="getTimeRange()">
+  </app-range-information>
+  <app-edited-information  *ngIf = "getCorrectionStatus()" [newCarCounter]="getNewCarCounter()" [oldCarCounter]="getOldCarCounter()"></app-edited-information>
+  <div>
+    <p class="correction-information__lable">
+      Comment: {{ getComment() }}
+    </p>
+    <mat-form-field class="form__comment-input-field">
+      <textarea #commentInputField matInput placeholder="Leave a comment" value=""></textarea>
+    </mat-form-field>
+    <div class="form__widget-btns">
+      <button mat-raised-button class="road__save-comment-btn control_button warn" (click)="onDeleteCheckpoint()">
+        Delete
+      </button>
+      <button mat-raised-button class="road__save-comment-btn control_button" (click)="onSaveComment()">
+        Save
+      </button>
+    </div>
+  </div>
+</div>

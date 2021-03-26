@@ -1,0 +1,44 @@
+<div id="data-chart"></div>
+<div class="data-map"></div>
+<div class="office-heatmap">
+  <div id="heatmapContainer" #mapContainer></div>
+  <div id="office-map" #mapContainer>
+    <div id="table-1" class="table">702.42</div>
+    <div id="table-2" class="table">702.43</div>
+    <div id="table-3" class="table">702.41</div>
+    <div id="table-4" class="table">702.40</div>
+    <div id="table-5" class="table">702.39</div>
+    <div id="table-6" class="table">702.42</div>
+    <div id="table-7" class="table">702.43</div>
+    <div id="table-8" class="table">702.41</div>
+    <div id="table-9" class="table">702.40</div>
+    <div id="wall"></div>
+  </div>
+  <i  class="material-icons camera" (click)="cameraTurn()">
+    videocam
+    </i>
+  <svg id="mask-wrapper" viewbox="0 0 1200 1500" width="100%" height="100%">
+    <defs>
+      <mask id="mask" x="0" y="0" width="1500" height="150" >
+        <rect x="0" y="0" width="100%" height="800" fill="#fff" />
+        <!-- <rect
+          x="180"
+          y="50"
+          width="315"
+          height="290"
+        /> -->
+        <path *ngIf='cameraOn' d="M490 96
+        A 20 8, 0, 0, 0, 185 98
+        L 340 480 Z"/>
+      </mask>
+    </defs>
+    <rect
+      x="0"
+      y="0"
+      width="100%"
+      height="100%"
+      mask="url(#mask)"
+      fill-opacity="0.3"
+    />
+  </svg>
+</div>

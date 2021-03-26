@@ -1,0 +1,10 @@
+.range-information__layout {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.range-information__subtitle,
+.range-information__text {
+  font-size: 1rem;
+}

@@ -1,0 +1,17 @@
+<div class='wrapper'  *ngIf='datasetFrameElement' >
+    <div class="table-one-wrapper" *ngFor = 'let element of datasetFrameElement.last_1sec_data;let i = index'  [ngStyle] = "changeBackground( i)">
+      <div class="table-row">
+        <div class=" cell " *ngIf='element.alert'>
+            <p *ngIf='datasetFrameElement'>Alert</p>
+          </div>
+        <div class=" cell " *ngIf=' element.alert' >
+          {{element.alert}}
+        </div>
+        <div class=" cell "  *ngIf='element.mean_score'>
+          <p *ngIf='datasetFrameElement'>{{ element.mean_score }}</p>
+        </div>
+        <div class=" cell "  *ngIf=' element.visual_reference'>
+          <p *ngIf='datasetFrameElement'>{{ element.visual_reference }}</p>
+        </div>
+      </div>
+  </div>

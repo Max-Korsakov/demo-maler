@@ -1,0 +1,40 @@
+#trafficChart {
+  width: 100%;
+  height: 300px;
+}
+
+.errors {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-self: center;
+  height: 300px;
+}
+
+.row {
+  display: flex;
+  width: 15%;
+}
+.no-errors {
+  color: rgb(104, 103, 103);
+  font-weight: bold;
+  font-size: 24px;
+  margin-left: 33%;
+  margin-top: 5%;
+}
+
+.error {
+  width: 160px;
+  border: 1px dashed rgb(104, 103, 103);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(104, 103, 103, 0.3);
+  border-radius: 10px;
+  background-clip: content-box;
+  border: 2px solid transparent;
+}

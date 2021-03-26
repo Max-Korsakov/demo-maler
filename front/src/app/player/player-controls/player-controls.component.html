@@ -1,0 +1,116 @@
+<div class="data-slider">
+  <neo-slider
+  class="slider"
+    [min]="0"
+    [max]="duration"
+    [(ngModel)]="sliderCurrentTime"
+    (input)="onSlide($event)"
+  >
+  </neo-slider>
+
+</div>
+<div class="data-time">
+  <div class="text-data frame">Current frame: {{ currentFrameView }}</div>
+  <div class="flex">
+    <div class="text-data current">Current time {{ currentTimeView }}</div>
+    <div class="text-data video video-time">Video time {{ videoTimeView }}</div>
+  </div>
+</div>
+<div class="controllers-wrapper">
+  <neo-card class="play-controllers">
+    <div class="seek-controllers">
+      <div class="seeking-form">
+        <neo-form-field>
+          <input
+            type="number"
+            [(ngModel)]="seekingFrame"
+            neoInput
+            placeholder="Frame"
+          />
+        </neo-form-field>
+        <button
+          neo-button
+          [disabled]="!isVideoReadyToPlay"
+          (click)="findFrame()"
+          class="control_button"
+        >
+          Find
+        </button>
+      </div>
+      <div class="seeking-form">
+        <neo-form-field>
+          <input
+            neoInput
+            [(ngModel)]="seekingCurrentTime"
+            type="number"
+            placeholder="Current time"
+          />
+        </neo-form-field>
+        <button
+          [disabled]="!isVideoReadyToPlay"
+          neo-button
+          (click)="findCurrentTime()"
+          class="control_button"
+        >
+          Find
+        </button>
+      </div>
+    </div>
+    <div class="play-buttons">
+      <h6 class="playback-status">
+        {{ isVideoPlay ? "Playback speed: " + playBackRate : "" }}
+      </h6>
+      <div class="flex">
+        <button
+          [disabled]="!isVideoReadyToPlay"
+          neo-button
+          (click)="slowDawnPlaybackRate()"
+          class="control_button small"
+        >
+          <span class="material-icons shadow">
+            remove
+          </span>
+        </button>
+        <button
+          [disabled]="!isVideoReadyToPlay"
+          neo-button
+          color="primary"
+          (click)="play()"
+          class="control_button"
+        >
+          {{ isVideoPlay ? "Stop" : "Play" }}
+        </button>
+        <button
+          [disabled]="!isVideoReadyToPlay"
+          neo-button
+          (click)="speedUpPlaybackRate()"
+          class="control_button small"
+        >
+          <span class="material-icons shadow">
+            add
+          </span>
+        </button>
+      </div>
+
+      <div class="flex">
+        <button
+          [disabled]="!isVideoReadyToPlay"
+          neo-button
+          (click)="goToPreviousFrame()"
+          class="control_button small_font"
+        >
+          Previous Frame
+        </button>
+
+        <button
+          [disabled]="!isVideoReadyToPlay"
+          neo-button
+          (click)="goToNextFrame()"
+          class="control_button small_font"
+        >
+          Next Frame
+        </button>
+      </div>
+    </div>
+  </neo-card>
+</div>
